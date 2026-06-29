@@ -2366,7 +2366,7 @@ end
     Selected.TextWrapped = false
     Selected.TextTruncate = Enum.TextTruncate.AtEnd
     Selected.TextXAlignment = Enum.TextXAlignment.Left
-    Selected.Text = self.option or ""
+    Selected.Text = type(self.option) == "table" and table.concat(self.option, ", ") or self.option or ""
 
     local Arrow = Instance.new("ImageLabel")
     Arrow.Name = "Arrow"
