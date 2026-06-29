@@ -2951,14 +2951,19 @@ end
             textbox.Box.TextHolder.PlaceholderText = self.name
 
             if not Library.Flags[self.flag] then
-                Library.Flags[self.flag] = self.value
+                Library.Flags[self.flag] = self.value or ""
             else
                 textbox.Box.TextHolder.Text = Library.Flags[self.flag]
             end
 
-            self.callback(Library.Flags[self.flag])
+            if self.callback then
+                self.callback(Library.Flags[self.flag])
+            end
+
             textbox.Box.TextHolder.FocusLost:Connect(function()
-                self.callback(textbox.Box.TextHolder.Text)
+                if self.callback then
+                    self.callback(textbox.Box.TextHolder.Text)
+                end
                 Library.save_flags()
             end)
 
